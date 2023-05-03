@@ -3,7 +3,13 @@
 
 # https://github.com/osrf/docker_images/blob/master/README.md#ros---1
 # https://github.com/osrf/docker_images/blob/master/ros/galactic/ubuntu/focal/desktop/Dockerfile
-FROM osrf/ros:galactic-desktop
+
+# ros2 galactic amd64 image
+# FROM osrf/ros:galactic-desktop
+
+# ros2 galactic arm64 image
+FROM arm64v8/ros:galactic-ros-base
+SHELL ["/bin/bash", "-c"]
 
 ARG user_id=1000
 ARG ros_ws=/home/dockeruser/dev_ws
@@ -16,7 +22,9 @@ RUN apt-get update && apt-get install -y \
     python-is-python3 \
     nano \
     less \
-    xterm
+    xterm \
+    x11-apps \
+    ros-${ROS_DISTRO}-turtlesim
 #    && rm -rf /var/lib/apt/lists/*
 
 # Switch to a non-root user.

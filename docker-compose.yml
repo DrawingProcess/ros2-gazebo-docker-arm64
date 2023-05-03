@@ -21,12 +21,18 @@ services:
       # Set a fancy prompt (See ~/.bashrc in the container)
       - TERM=xterm-256color
 
-      # WSLg settings
-      # https://www.reddit.com/r/bashonubuntuonwindows/comments/n2nthu/can_i_use_the_new_wslg_with_docker/
-      - DISPLAY
-      - WAYLAND_DISPLAY
-      - XDG_RUNTIME_DIR
-      - PULSE_SERVER
+      # Mac X11
+      # - DISPLAY=$DISPLAY
+      # - DISPLAY=docker.for.mac.host.internal:0
+      - DISPLAY=192.168.35.143:0
+      # - DISPLAY=host.docker.internal:0
+
+      # # WSLg settings
+      # # https://www.reddit.com/r/bashonubuntuonwindows/comments/n2nthu/can_i_use_the_new_wslg_with_docker/
+      # - DISPLAY
+      # - WAYLAND_DISPLAY
+      # - XDG_RUNTIME_DIR
+      # - PULSE_SERVER
 
     volumes:
       - ./:/home/dockeruser/project
@@ -34,6 +40,11 @@ services:
       - ./docker/ros2/.ros:/home/dockeruser/.ros
       - ./docker/ros2/.gazebo/:/home/dockeruser/.gazebo
 
-      # WSLg settings
-      - /mnt/wslg:/mnt/wslg
+      # Mac X11
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Xauthority:/root/.Xauthority:rw
+
+      # # WSLg settings
+      # - /mnt/wslg:/mnt/wslgs
+      # - /tmp/.X11-unix:/tmp/.X11-unix
+    privileged: true
