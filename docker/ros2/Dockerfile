@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y \
     less \
     xterm \
     x11-apps \
+    x11-xserver-utils \
     ros-${ROS_DISTRO}-turtlesim
 #    && rm -rf /var/lib/apt/lists/*
 
